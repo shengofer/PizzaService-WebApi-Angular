@@ -22,7 +22,8 @@ namespace PizzaService.Web.Controllers
 
             //ILearningRepository repository = new LearningRepository(new LearningContext());
 
-            return TheRepository.GetAllPizza().ToList();
+            //return TheRepository.GetAllPizza().ToList();
+            return TheRepository.GetAllPizzaWithImage();
            /* return new Pizza[] 
             {
                   new  Pizza

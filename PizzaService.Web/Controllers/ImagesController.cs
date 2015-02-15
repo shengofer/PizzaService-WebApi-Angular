@@ -23,11 +23,25 @@ namespace PizzaService.Web.Controllers
             FileStream fileStream = new FileStream(filePath, FileMode.Open);
             Image image = Image.FromStream(fileStream);
             MemoryStream memoryStream = new MemoryStream();
-            image.Save(memoryStream, ImageFormat.Jpeg);
+            image.Save(memoryStream, ImageFormat.Png);
             result.Content = new ByteArrayContent(memoryStream.ToArray());
             result.Content.Headers.ContentType = new MediaTypeHeaderValue("image/png");
 
             return result;
         }
+
+       /* public HttpResponseMessage Get(int id)
+        {
+            var result = new HttpResponseMessage(HttpStatusCode.OK);
+            String filePath = HostingEnvironment.MapPath("~/Images/Margarita.png");
+            FileStream fileStream = new FileStream(filePath, FileMode.Open);
+            Image image = Image.FromStream(fileStream);
+            MemoryStream memoryStream = new MemoryStream();
+            image.Save(memoryStream, ImageFormat.Png);
+            result.Content = new ByteArrayContent(memoryStream.ToArray());
+            result.Content.Headers.ContentType = new MediaTypeHeaderValue("image/png");
+
+            return result;
+        }*/
     }
 }

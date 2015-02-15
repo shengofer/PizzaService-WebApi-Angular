@@ -24,6 +24,7 @@ namespace PizzaService.Data
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Pizza> Pizzas { get; set; }
+        public DbSet<PizzaImage> PizzaImages { get; set; }
     
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -31,7 +32,8 @@ namespace PizzaService.Data
             modelBuilder.Configurations.Add(new CustomerMapper());
             modelBuilder.Configurations.Add(new OrderMapper());
             modelBuilder.Configurations.Add(new PizzaMapper());
-  
+            modelBuilder.Configurations.Add(new PizzaImageMapper());
+            
             base.OnModelCreating(modelBuilder);
         }
 

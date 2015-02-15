@@ -49,9 +49,11 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="Entities\Customer.cs" />
+    <Compile Include="Entities\PizzaImage.cs" />
     <Compile Include="Entities\Order.cs" />
     <Compile Include="Entities\Pizza.cs" />
     <Compile Include="IPizzaRepository.cs" />
+    <Compile Include="Mappers\PizzaImageMapper.cs" />
     <Compile Include="PizzaContext.cs" />
     <Compile Include="PizzaContextMigrationConfiguration.cs" />
     <Compile Include="PizzaDataSeeder.cs" />
@@ -69,6 +71,26 @@
     <Content Include="Images\HamAndMushrooms.png" />
     <Content Include="Images\Margarita.png" />
     <Content Include="Images\PeperoniWithTomatoes.png" />
+    <Content Include="Images\PizzaAmericana.png" />
+    <Content Include="Images\PizzaBavarian.png" />
+    <Content Include="Images\PizzaBBQ.png" />
+    <Content Include="Images\PizzaBBQDelux.png" />
+    <Content Include="Images\PizzaCarbonara.png" />
+    <Content Include="Images\PizzaChikenita.png" />
+    <Content Include="Images\PizzaDzhamaykanBombastic.png" />
+    <Content Include="Images\PizzaExtravaganZZa.png" />
+    <Content Include="Images\PizzaFiveCheeses.png" />
+    <Content Include="Images\PizzaHawaiian.png" />
+    <Content Include="Images\PizzaKantri.png" />
+    <Content Include="Images\PizzaMexicana.png" />
+    <Content Include="Images\PizzaMitZZa.png" />
+    <Content Include="Images\PizzaPaparaZZi.png" />
+    <Content Include="Images\PizzaProvence.png" />
+    <Content Include="Images\PizzaSpinachandFeta.png" />
+    <Content Include="Images\PizzaTexas.png" />
+    <Content Include="Images\PizzaTonyPepperoni.png" />
+    <Content Include="Images\PizzaTuna.png" />
+    <Content Include="Images\PizzaVeggieFeast.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

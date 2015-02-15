@@ -32,7 +32,7 @@ namespace PizzaService.Data
         IQueryable<Pizza> GetPizzaInCustomerBucket(int customerID);
        
         IQueryable<Pizza> GetAllPizza();
-
+        List<Pizza> GetAllPizzaWithImage();
         // Order
         IQueryable<Order> GetPizzaActiveOrder();
 

@@ -23,13 +23,16 @@ namespace PizzaService.Data.Mappers
             this.Property(s => s.name).IsUnicode(false);
 
             this.Property(s => s.price).IsRequired();
-
+            this.Property(s => s.weight).IsRequired();
             this.Property(c => c.description).IsOptional();
             this.Property(c => c.description).HasMaxLength(1000);
 
+            this.HasOptional(o => o.image).WithOptionalDependent(c => c.pizza).Map(p => p.MapKey("imageID")).WillCascadeOnDelete(true);
+            //this.HasOptional(o => o.image).WithOptionalPrincipal(o => o.pizza).Map(c => c.MapKey("PizzaID")).WillCascadeOnDelete(false);
+
             //this.Property(c => c.image).HasColumnName("image").HasColumnType("varbinary");
             //this.Property(p => p.image).HasColumnType("image");
-            this.Property(c => c.image).IsOptional();
+            //this.Property(c => c.image).IsOptional();
             //this.Property(c => c.image).IsOptional();
             //this.Property(c => c.image).HasMaxLength(1000);
         }
