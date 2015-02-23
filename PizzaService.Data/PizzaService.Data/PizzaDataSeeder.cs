@@ -45,17 +45,28 @@ namespace PizzaService.Data
             {
                     for (int i = 0; i < pizzaNames.Length; i++)
                     {
+
                         var pizzaInfo = SplitValue(pizzaNames[i]);
+
+                        var image = new PizzaImage
+                             {
+                                 path = pizzaInfo[3]
+                             };
+                        _ctx.PizzaImages.Add(image);
+                        _ctx.SaveChanges();
+                         image = _ctx.PizzaImages.Find(i+1);
                         var pizza = new Pizza()
                         {
                             name = pizzaInfo[0],
                             description = pizzaInfo[1],
                             price = new Random().Next(20,50),
                             weight = Convert.ToDouble(pizzaInfo[2]),
-                            image = new PizzaImage
+                            imageID = image.id,
+                            image = image
+                           /* image = new PizzaImage
                             {
                                 path=pizzaInfo[3]
-                            }
+                            }*/
                             //image = converterDemo(Image.FromFile("Images/Margarita.png"))
                             //image = imageToByteArray(Image.FromFile("Images/Margarita.png"))
                            // image = ImageToByte(img),

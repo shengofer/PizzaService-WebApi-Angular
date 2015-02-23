@@ -11,7 +11,7 @@ namespace PizzaService.Data.Entities
         public Pizza()
         {
             orders = new List<Order>();
-            image = new PizzaImage();
+           // image = new PizzaImage();
         
         }
         public int id { get; set; }
@@ -22,8 +22,9 @@ namespace PizzaService.Data.Entities
         //public byte[] image { get; set; }
         //public byte[] image { get; set; }'
        // public string image { get; set; }
-        public PizzaImage image { get; set; }
+       public virtual PizzaImage image { get; set; }
 
+        public int imageID { get; set; }
         public ICollection<Order> orders { get; set; }
 
     }

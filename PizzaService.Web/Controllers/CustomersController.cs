@@ -7,7 +7,6 @@ using System.Net;
 using System.Net.Http;
 using System.Web;
 using System.Web.Http;
-using System.Web.Mvc;
 
 
 namespace Learning.Web2.Controllers
@@ -16,6 +15,7 @@ namespace Learning.Web2.Controllers
     {
         //
         // GET: /Customers/
+        [HttpPost]
         public HttpResponseMessage Post([FromBody] Customer customer)
         {
             try

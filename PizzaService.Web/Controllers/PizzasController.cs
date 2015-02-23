@@ -7,6 +7,7 @@ using System.Web.Http;
 using System.Net;
 using System.Web.Http.Routing;
 using PizzaService.Data.Entities;
+using Learning.Web.Filters;
 
 
 
@@ -16,31 +17,41 @@ namespace PizzaService.Web.Controllers
     {
         //
         // GET: /Pizzas/
-
-        public List<Pizza> Get()
+       //  [LearningAuthorizeAttribute]
+        public Object Get(int page = 0, int pageSize = 10)
         {
+            IQueryable<Pizza> query;
 
-            //ILearningRepository repository = new LearningRepository(new LearningContext());
+            query = TheRepository.GetAllPizza().OrderBy(c => c.id);
+            var totalCount = query.Count();
+            var totalPages = (int)Math.Ceiling((double)totalCount / pageSize);
 
-            //return TheRepository.GetAllPizza().ToList();
-            return TheRepository.GetAllPizzaWithImage();
-           /* return new Pizza[] 
+            var urlHelper = new UrlHelper(Request);
+            var prevLink = page > 0 ? urlHelper.Link("Pizzas", new { page = page - 1, pageSize = pageSize }) : "";
+            var nextLink = page < totalPages - 1 ? urlHelper.Link("Pizzas", new { page = page + 1, pageSize = pageSize }) : "";
+
+            var results = query
+                          .Skip(pageSize * page)
+                          .Take(pageSize)
+                          .ToList()
+                          .Select(s => s);
+
+            return new
             {
-                  new  Pizza
-                {
-                    Id = 1,
-                    Name = "Glenn Block",
-                    Price = 23.245
-                },
-                new Pizza
-                {
-                    Id = 2,
-                    Name = "Dan Roth",
-                    Price = 84.23
-                }
-            };*/
+                TotalCount = totalCount,
+                TotalPages = totalPages,
+                PrevPageLink = prevLink,
+                NextPageLink = nextLink,
+                Results = results
+            };
 
         }
+      /*  public List<Pizza> Get()
+        {
+
+            return TheRepository.GetAllPizzaWithImage();
+
+        }*/
 
         public HttpResponseMessage GetPizza(int id)
         {

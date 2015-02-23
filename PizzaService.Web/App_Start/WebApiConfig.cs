@@ -17,6 +17,11 @@ namespace PizzaService.Web
                 defaults: new { id = RouteParameter.Optional }
             );*/
             config.Routes.MapHttpRoute(
+                name: "Auth",
+                routeTemplate: "api/auth/{action}/{id}",
+                defaults: new { controller = "auth", id=RouteParameter.Optional }
+               );
+            config.Routes.MapHttpRoute(
               name: "Pizzas",
               routeTemplate: "api/pizzas/{id}",
               defaults: new { controller = "pizzas", id = RouteParameter.Optional }
@@ -28,17 +33,25 @@ namespace PizzaService.Web
              defaults: new { controller = "customers", id = RouteParameter.Optional }
          );
 
-            config.Routes.MapHttpRoute(
+           /* config.Routes.MapHttpRoute(
               name: "Orders",
               routeTemplate: "api/customers/{customerID}/pizzas/{pizzaID}",
               defaults: new { controller = "orders", customerID = RouteParameter.Optional,pizzaID = RouteParameter.Optional}
-          );
+          );*/
+
+            config.Routes.MapHttpRoute(
+              name: "Orders",
+              routeTemplate: "api/orders/{orderID}",
+              defaults: new { controller = "orders", orderID= RouteParameter.Optional }
+            );
 
             config.Routes.MapHttpRoute(
               name: "Images",
               routeTemplate: "api/images/{id}",
               defaults: new { controller = "images", id = RouteParameter.Optional }
           );
+
+   
 
 
             var jsonFormatter = config.Formatters.OfType<JsonMediaTypeFormatter>().First();
@@ -51,6 +64,11 @@ namespace PizzaService.Web
             // To disable tracing in your application, please comment out or remove the following line of code
             // For more information, refer to: http://www.asp.net/web-api
             config.EnableSystemDiagnosticsTracing();
+
+#if !DEBUG
+            //force HTTPs
+            config.Filters.Add(new ForceHttpsAttribute());
+#endif
         }
     }
 }

@@ -19,14 +19,20 @@ namespace PizzaService.Web.Controllers
         public HttpResponseMessage Get(int id)
         {
             var result = new HttpResponseMessage(HttpStatusCode.OK);
-            String filePath = HostingEnvironment.MapPath("~/Images/Margarita.png");
-            FileStream fileStream = new FileStream(filePath, FileMode.Open);
+            String pizzaPath = TheRepository.GetPizzaImagePathByPizzaId(id);
+          //  String filePath = HostingEnvironment.MapPath("~/Images/Margarita.png");
+            String filePath = HostingEnvironment.MapPath("~/Images/" + pizzaPath+".png");
+            FileStream fileStream = new FileStream(filePath, FileMode.Open);            
             Image image = Image.FromStream(fileStream);
+            fileStream.Close();
             MemoryStream memoryStream = new MemoryStream();
             image.Save(memoryStream, ImageFormat.Png);
             result.Content = new ByteArrayContent(memoryStream.ToArray());
+           // result.Content = new Base64FormattingOptions
             result.Content.Headers.ContentType = new MediaTypeHeaderValue("image/png");
 
+            memoryStream.Close();
+            
             return result;
         }
 

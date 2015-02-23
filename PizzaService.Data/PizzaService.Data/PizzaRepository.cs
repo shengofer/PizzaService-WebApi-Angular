@@ -17,9 +17,9 @@ namespace PizzaService.Data
         }
 
         //Customer
-        public bool LoginCustomer(string username, string password)
+        public bool LoginCustomer(string email, string password)
         {
-            var customer = _ctx.Customers.Where(s => s.username == username).SingleOrDefault();
+            var customer = _ctx.Customers.Where(s => s.email == email).SingleOrDefault();
 
             if (customer != null)
             {
@@ -43,6 +43,11 @@ namespace PizzaService.Data
             {
                 return false;
             }
+        }
+
+        public Customer GetCustomerByEmail(String email)
+        {
+            return  _ctx.Customers.Where(s => s.email == email).SingleOrDefault();
         }
      //   bool update(Customer originalStudent, Customer updatedStudent)
 
@@ -115,6 +120,17 @@ namespace PizzaService.Data
         public Pizza GetPizza(int pizzaId)
         {
             return _ctx.Pizzas.Find(pizzaId);
+          /*  return _ctx.Pizzas
+                .Include("PizzaImages")
+                .Where(c =>c.id == pizzaId)
+                .SingleOrDefault();*/
+                // .Where(c => c.orders.Any(s => s.customer.id == customerID && s.activeStatus==1))
+         /*   var result = from p in _ctx.Pizzas
+                         join i in _ctx.PizzaImages on p.image.id equals i.id
+                         where p.id == pizzaId
+                         select p;
+
+            return result.SingleOrDefault();*/
         }
 
         public IQueryable<Pizza> GetAllPizza()
@@ -184,6 +200,21 @@ namespace PizzaService.Data
                 .AsQueryable();
         }
 
+        public IQueryable<Order> GetPizzaCustomerOrderWithStatus(int customerID, int newActiveStatus)
+        {
+            return _ctx.Orders              
+                .Include("customer")
+                .Include("pizza")
+                .Where(c => c.activeStatus == newActiveStatus)
+                .Where(i => i.customer.id == customerID)
+                .AsQueryable();
+
+               /*  return _ctx.Pizzas
+                    .Include("Orders")
+                    .Where(c => c.orders.Any(s => s.customer.id == customerID && s.activeStatus==1))
+                    .AsQueryable();*/
+        }
+
         public bool InsertOrder(Order order)
         {
             try
@@ -224,14 +255,43 @@ namespace PizzaService.Data
             }
 
             return false;
-        }  
-           
-                
-     
+        }
 
+        //Images
+        public String GetPizzaImagePathByPizzaId(int pizzaID)
+        {
+            var result = from p in _ctx.Pizzas
+                         join i in _ctx.PizzaImages on p.image.id equals i.id
+                         where p.id == pizzaID
+                         select i.path;
+
+            return result.SingleOrDefault();
+            /*String res = _ctx.Pizzas
+                            .Include("Images")
+                            .Where(c =>c.id == pizzaID && )*/
+        }
+
+        /* return _ctx.Pizzas
+                    .Include("Orders")
+                    .Where(c => c.orders.Any(s => s.customer.id == customerID && s.activeStatus==1))
+                    .AsQueryable();*/
         public bool SaveAll()
         {
-            return _ctx.SaveChanges() > 0;
+            try
+            {
+                return _ctx.SaveChanges() > 0;
+            }
+            catch (DbEntityValidationException ex)
+            {
+                foreach (var validationErrors in ex.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        System.Diagnostics.Trace.TraceInformation("Property: {0} Error: {1}", validationError.PropertyName, validationError.ErrorMessage);
+                    }
+                }
+                return false;
+            }
         }
     }
 }

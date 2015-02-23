@@ -1,5 +1,6 @@
 ﻿
 using PizzaService.Data;
+using PizzaService.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace PizzaService.Web.Controllers
     public class BaseApiController : ApiController
     {
         private IPizzaRepository _repo;
+        private ModelFactory _modelFactory;
 
         protected IPizzaRepository TheRepository
         {
@@ -23,6 +25,18 @@ namespace PizzaService.Web.Controllers
                 }
                 
                 return _repo;
+            }
+        }
+
+        protected ModelFactory TheModelFactory
+        {
+            get
+            {
+                if (_modelFactory == null)
+                {
+                    _modelFactory = new ModelFactory();
+                }
+                return _modelFactory;
             }
         }
     }

@@ -12,10 +12,11 @@ namespace PizzaService.Data
 
 
         //Customer
-        bool LoginCustomer(string userName, string password);
+        bool LoginCustomer(string email, string password);
         bool InsertCustomer(Customer customer);
 
         Customer GetCustomer(int customerId);
+        Customer GetCustomerByEmail(String email);
         // bool update(Customer originalCustomer, Customer updatedCustomer);
         //bool deleteCustomer(int id);
 
@@ -42,9 +43,12 @@ namespace PizzaService.Data
         bool UpdateOrder(Order originOrder, Order updatedOrder);
         //bool MakeStatusOrderPending(int customerID);
        // bool ChangeStatusFromPendingToFinish(int orderID);
-
+        
         bool CleanBucket(int customerID);
-
+        IQueryable<Order> GetPizzaCustomerOrderWithStatus(int customerID, int activeStatus);
         bool SaveAll();
+
+        // Image
+        String GetPizzaImagePathByPizzaId(int pizzaID);
     }
 }

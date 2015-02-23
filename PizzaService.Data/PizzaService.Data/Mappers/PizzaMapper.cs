@@ -26,15 +26,14 @@ namespace PizzaService.Data.Mappers
             this.Property(s => s.weight).IsRequired();
             this.Property(c => c.description).IsOptional();
             this.Property(c => c.description).HasMaxLength(1000);
+            this.Property(t => t.imageID).IsOptional();
+            this.HasOptional(t => t.image).WithMany().HasForeignKey(d => d.imageID);
+           // this.HasRequired(t => t.image).WithMany(p => p.pizza).HasForeignKey(d => d.imageID);
+          //  this.Property(c => c.imageID).IsOptional();
+           // this.HasOptional(o => o.image).(c => c.pizza).Map(c => c.MapKey("imageID")).WillCascadeOnDelete(true);
+          // this.HasOptional(o => o.image).WithOptionalDependent(c => c.pizza).Map(p => p.MapKey("imageID")).WillCascadeOnDelete(true);
+          //  this.HasOptional(o => o.image).WithOptionalPrincipal(c => c.pizza).Map(p => p.MapKey("imageID")).WillCascadeOnDelete(true);
 
-            this.HasOptional(o => o.image).WithOptionalDependent(c => c.pizza).Map(p => p.MapKey("imageID")).WillCascadeOnDelete(true);
-            //this.HasOptional(o => o.image).WithOptionalPrincipal(o => o.pizza).Map(c => c.MapKey("PizzaID")).WillCascadeOnDelete(false);
-
-            //this.Property(c => c.image).HasColumnName("image").HasColumnType("varbinary");
-            //this.Property(p => p.image).HasColumnType("image");
-            //this.Property(c => c.image).IsOptional();
-            //this.Property(c => c.image).IsOptional();
-            //this.Property(c => c.image).HasMaxLength(1000);
         }
     }
 }
