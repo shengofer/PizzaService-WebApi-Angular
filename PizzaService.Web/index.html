@@ -1,0 +1,128 @@
+﻿<!DOCTYPE html>
+<html data-ng-app="PizzaApp">
+<head>
+    <meta name="keywords" content="angularjs,SPA,Single Page Application,bootstrap,bootstrap ui,tutorial,JS framework,pizza" />
+    <meta name="description" content="SPA built using angularjs, this tutorial integrates with foursquare APIs, back end built using Asp.net web api" />
+    <meta content="IE=edge, chrome=1" http-equiv="X-UA-Compatible" />
+    <title>Pizza Service</title>
+    <link href="content/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="content/css/amelia-bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="Content/css/toaster.css" rel="stylesheet" />
+    <link href="content/css/loading-bar.min.css" rel="stylesheet" />
+    <link href="content/css/site.css" rel="stylesheet" />
+   <!-- <link href="content/css/pizzaList.css" rel="stylesheet" />-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <link rel="shortcut icon" href="../../infopulse/FoursquareAngularJS-master/FoursquareAngularJS.Web/favicon.ico" />
+</head>
+<body>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<script>
+    window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.twttr||{};if(d.getElementById(id))return;js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);t._e=[];t.ready=function(f){t._e.push(f);};return t;}(document,"script","twitter-wjs"));
+</script>
+    <div id="page">
+        <header class="container" data-ng-controller="navigationController">
+            <div id="menu" class="navbar navbar-default">
+                <div class="navbar-header">
+                    <button class="btn btn-success navbar-toggle" data-ng-click="navbarExpanded = !navbarExpanded">
+                        <span class="glyphicon glyphicon-chevron-down"></span>
+                    </button>
+                    <div id="logo">
+                        <a href='#/'>
+                            <h4>Pizza Delivery</h4>
+                        </a>
+                    </div>
+                </div>
+                <div class="navbar-collapse collapse" data-collapse="!navbarExpanded">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li data-ng-class="{'active':isActive('/explore')}"><a href="#/explore">Explore</a></li>
+                       <!-- <li data-ng-class="{'active':isActive('/singup')}"><a href="#/signup">Sign up</a></li>-->
+                        <ul ng-if="isAuthenticated()" class="nav navbar-nav pull-right">
+                            <li><a href="#/cart">Cart</a></li>
+                        </ul>
+                        <ul ng-if="!isAuthenticated()" class="nav navbar-nav pull-right">
+                            <li data-ng-class="{'active':isActive('/login')}"><a href="#/login">Login</a></li>
+                            <li data-ng-class="{'active':isActive('/signup')}"><a href="#/signup">Sign up</a></li>
+
+                        </ul>
+                        <ul ng-if="isAuthenticated()" class="nav navbar-nav pull-right">
+                            <li><a href="/#/logout">Logout</a></li>
+                        </ul>
+                        <!--<li data-ng-class="{'active':isActive('/places')}"><a href="#/places">My Places</a></li>
+                        <li data-ng-class="{'active':isActive('/about')}"><a href="#/about">About</a></li>-->
+                    </ul>
+                </div>
+            </div>
+        </header>
+       <section id="body" class="container">
+            <div data-ng-view=""></div>
+        </section>
+        <hr />
+        <footer class="container">
+
+            <a class="twitter-share-button"
+               href="https://twitter.com/service_pizza"
+               data-via="service_pizza">
+                Tweet
+            </a>
+            <div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+        </footer>
+
+    </div>
+
+    <!-- 3rd party libraries -->
+
+
+   <!-- <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular-route.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular-resource.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular-animate.min.js"></script>-->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular.js"></script>
+   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular-route.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular-resource.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular-animate.js"></script>
+
+<!--    <script src="scripts/angular.js"></script>
+    <script src ="scripts/angular-route.js"></script>
+    <script src = "scripts/angular-resource.js"></script>
+    <script src="scripts/angular-animate.js"></script>-->
+    <script src="scripts/angular-messages.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.9.0/ui-bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.9.0/ui-bootstrap-tpls.min.js"></script>
+    <script src="scripts/satellizer.js"></script>
+    <script src="scripts/toaster.js"></script>
+    <script src="scripts/angular-strap.js"></script>
+    <script src="scripts/angular-strap.tpl.js"></script>
+    <script src="scripts/loading-bar.min.js"></script>
+
+
+    <!-- Load app main script -->
+    <script src="app/app.js"></script>
+    <!-- Load services -->
+    <script src="app/services/pizzasViewService.js"></script>
+    <script src="app/services/pizzaImagesService.js"></script>
+    <script src="app/services/customersService.js"></script>
+    <script src="app/services/sharedPropertiesService.js"></script>
+    <script src="app/services/ordersService.js"></script>
+
+
+    <!-- Load controllers -->
+    <script src="app/controllers/pizzasViewController.js"></script>
+    <script src="app/controllers/navigationController.js"></script>
+    <script src="app/controllers/loginController.js"></script>
+    <script src="app/controllers/logoutController.js"></script>
+    <script src="app/controllers/signupController.js"></script>
+    <script src="app/controllers/pizzaImagesController.js"></script>
+    <script src="app/controllers/cartController.js"></script>
+
+</body>
+</html>
+
+
+

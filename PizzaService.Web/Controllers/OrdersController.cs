@@ -80,7 +80,6 @@ namespace PizzaService.Web.Controllers
             List<Order> results = query
                           .Skip(pageSize * page)
                           .Take(pageSize)
-                          //.ToList()
                           .Select(s=>s)
                           .ToList();
 
@@ -108,44 +107,7 @@ namespace PizzaService.Web.Controllers
 
         }
 
-       // [HttpPatch]
-       // [HttpPut]
-      /*  public HttpResponseMessage Put(int id, [FromBody] CourseModel courseModel)
-        {
-            try
-            {
-
-                var updatedCourse = TheModelFactory.Parse(courseModel);
-
-                if (updatedCourse == null) Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Could not read subject/tutor from body");
-
-                var originalCourse = TheRepository.GetCourse(id, false);
-
-                if (originalCourse == null || originalCourse.Id != id)
-                {
-                    return Request.CreateResponse(HttpStatusCode.NotModified, "Course is not found");
-                }
-                else
-                {
-                    updatedCourse.Id = id;
-                }
-
-                if (TheRepository.Update(originalCourse, updatedCourse) && TheRepository.SaveAll())
-                {
-                    return Request.CreateResponse(HttpStatusCode.OK, TheModelFactory.Create(updatedCourse));
-                }
-                else
-                {
-                    return Request.CreateResponse(HttpStatusCode.NotModified);
-                }
-
-            }
-            catch (Exception ex)
-            {
-
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
-            }
-        }*/
+       
 
 
     }

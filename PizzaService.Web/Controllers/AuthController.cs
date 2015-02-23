@@ -85,15 +85,7 @@ namespace PizzaService.Web.Controllers
             if (String.IsNullOrWhiteSpace(model.password))
                 return BadRequest("Password is required.");
 
-          /*  bool auth = false;
-            try
-            {
-                auth = TheRepository.LoginCustomer(model.email, model.password);
-            }
-            catch (Exception)
-            {
-                return Unauthorized();
-            }*/
+
 
             Customer customer;
             try

@@ -215,7 +215,34 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\app.js" />
+    <Content Include="app\controllers\cartController.js" />
+    <Content Include="app\controllers\loginController.js" />
+    <Content Include="app\controllers\logoutController.js" />
+    <Content Include="app\controllers\navigationController.js" />
+    <Content Include="app\controllers\pizzaImagesController.js" />
+    <Content Include="app\controllers\pizzasViewController.js" />
+    <Content Include="app\controllers\signupController.js" />
+    <Content Include="app\services\customersService.js" />
+    <Content Include="app\services\ordersService.js" />
+    <Content Include="app\services\pizzaImagesService.js" />
+    <Content Include="app\services\pizzasViewService.js" />
+    <Content Include="app\services\sharedPropertiesService.js" />
+    <Content Include="app\views\cart.html" />
+    <Content Include="app\views\login.html" />
+    <Content Include="app\views\orderSuccess.html" />
+    <Content Include="app\views\pizzasList.html" />
+    <Content Include="app\views\signup.html" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="Content\css\amelia-bootstrap-theme.min.css" />
+    <Content Include="Content\css\bootstrap.css" />
+    <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\loading-bar.css" />
+    <Content Include="Content\css\loading-bar.min.css" />
+    <Content Include="Content\css\pizzaList.css" />
+    <Content Include="Content\css\site.css" />
+    <Content Include="Content\css\toaster.css" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -270,6 +297,9 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Images\HamAndMushrooms.png" />
     <Content Include="Images\Margarita.png" />
@@ -295,6 +325,18 @@
     <Content Include="Images\PizzaTonyPepperoni.png" />
     <Content Include="Images\PizzaTuna.png" />
     <Content Include="Images\PizzaVeggieFeast.png" />
+    <Content Include="index.html" />
+    <Content Include="Scripts\angular-animate.js" />
+    <Content Include="Scripts\angular-animate.min.js" />
+    <Content Include="Scripts\angular-messages.js" />
+    <Content Include="Scripts\angular-resource.js" />
+    <Content Include="Scripts\angular-resource.min.js" />
+    <Content Include="Scripts\angular-route.js" />
+    <Content Include="Scripts\angular-route.min.js" />
+    <Content Include="Scripts\angular-strap.js" />
+    <Content Include="Scripts\angular-strap.tpl.js" />
+    <Content Include="Scripts\angular.js" />
+    <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />
     <Content Include="Scripts\jquery-2.1.3.min.js" />
     <Content Include="Scripts\jquery-2.1.3.min.map" />
@@ -309,7 +351,15 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\knockout-3.2.0.debug.js" />
     <Content Include="Scripts\knockout-3.2.0.js" />
+    <Content Include="Scripts\loading-bar.js" />
+    <Content Include="Scripts\loading-bar.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\satellizer.js" />
+    <Content Include="Scripts\toaster.js" />
+    <Content Include="Scripts\ui-bootstrap-0.9.0.js" />
+    <Content Include="Scripts\ui-bootstrap-0.9.0.min.js" />
+    <Content Include="Scripts\ui-bootstrap-tpls-0.9.0.js" />
+    <Content Include="Scripts\ui-bootstrap-tpls-0.9.0.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -341,6 +391,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\images\" />
     <Folder Include="Views\Account\" />
     <Folder Include="Views\Images\" />
   </ItemGroup>
