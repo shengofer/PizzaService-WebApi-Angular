@@ -1,6 +1,6 @@
 ﻿'use strict';
 app = angular.module('PizzaApp');
-app.controller('navigationController', function ($scope, $location,$auth, sharedProperties) {
+app.controller('navigationController', function ($scope, $location,$auth, sharedProperties,cookieService) {
 
     $scope.isActive = function (path) {
 
@@ -8,8 +8,9 @@ app.controller('navigationController', function ($scope, $location,$auth, shared
     };
 
     $scope.isAuthenticated = function() {
-        var testvar = sharedProperties.getUser();
-        if(testvar) return true;
+        //var user = sharedProperties.getUser();
+        var user = cookieService.get();
+        if(user) return true;
         else false;
         //return $auth.isAuthenticated();
     };

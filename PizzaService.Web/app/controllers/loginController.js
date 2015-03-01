@@ -1,12 +1,13 @@
-
+'use strict';
 var app = angular.module('PizzaApp');
-app.controller('loginController', function($scope, $alert, $auth, sharedProperties,$location){
+app.controller('loginController', function($scope, $alert, $auth, sharedProperties,$location,cookieService){
     $scope.login = function() {
         $auth.login({ email: $scope.email, password: $scope.password })
             .then(function(response) {
                // $scope.user = response.data;
               //  $scope.em = $scope.user.email;
-                sharedProperties.setUser(response.data);
+               // sharedProperties.setUser(response.data);
+                cookieService.set(response.data);
                 $alert({
                     content: 'You have successfully logged in',
                     animation: 'fadeZoomFadeDown',

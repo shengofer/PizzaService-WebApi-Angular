@@ -5,7 +5,8 @@
 
             <!--<a href="#" class="btn btn-primary">Default button</a>-->
             <div class="col-md-2 col-xs-4 col-sm-2">
-                <button  href="#/ordersucces" data-ng-click="makeOrder()" class="btn btn-primary">Make order</button>
+                <button  href="" data-ng-click="makeOrder()" class="btn btn-primary">Make order</button>
+                <span class="badge">{{totalPrice}}$</span>
                 <!--<button class="btn btn-primary pull-right" data-ng-click="makeOrder()"><span class="glyphicon glyphicon-search"></span>Make Order</button>-->
             </div>
 
@@ -36,7 +37,7 @@
                             <p>{{pizza.description}}</p>
                             <hr class="seperator" />
 
-                            <a ng-if="isAuth()" href="" data-ng-click="addToBucket(pizza)"><span class="glyphicon glyphicon-bookmark"></span>Add to bucket</a>
+                            <a ng-if="isAuth()" href="" data-ng-click="removeOrder(pizza.orderID)"><span class="glyphicon glyphicon-bookmark"></span>Remove from Cart</a>
 
                         </div>
                         <div class="col-xs-4 col-md-3">

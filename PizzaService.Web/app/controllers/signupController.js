@@ -1,3 +1,4 @@
+'use strict';
 var app = angular.module('PizzaApp');
 app.controller('signupController', function($scope,customersService, $alert, $auth,$http,$location) {
     $scope.signup = function() {
@@ -23,6 +24,7 @@ app.controller('signupController', function($scope,customersService, $alert, $au
                     type: 'material',
                     duration: 3
                 });
+               // pattern = true;
             }
         },
         $location.path( "/login" )

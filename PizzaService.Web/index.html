@@ -52,7 +52,7 @@
 
                         </ul>
                         <ul ng-if="isAuthenticated()" class="nav navbar-nav pull-right">
-                            <li><a href="/#/logout">Logout</a></li>
+                            <li><a href="#/logout">Logout</a></li>
                         </ul>
                         <!--<li data-ng-class="{'active':isActive('/places')}"><a href="#/places">My Places</a></li>
                         <li data-ng-class="{'active':isActive('/about')}"><a href="#/about">About</a></li>-->
@@ -87,6 +87,7 @@
    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular-route.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular-resource.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular-animate.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular-cookies.js"></script>
 
 <!--    <script src="scripts/angular.js"></script>
     <script src ="scripts/angular-route.js"></script>
@@ -110,6 +111,8 @@
     <script src="app/services/customersService.js"></script>
     <script src="app/services/sharedPropertiesService.js"></script>
     <script src="app/services/ordersService.js"></script>
+    <script src="app/services/cookieStoreService.js"></script>
+    <script src="app/services/base64Service.js"></script>
 
 
     <!-- Load controllers -->

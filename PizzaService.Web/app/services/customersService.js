@@ -1,3 +1,4 @@
+'use strict';
 var app = angular.module('PizzaApp');
 app.factory('customersService', function ($resource,$http,$location) {
     var local = {};

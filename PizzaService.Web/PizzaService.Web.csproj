@@ -223,6 +223,9 @@
     <Content Include="app\controllers\pizzaImagesController.js" />
     <Content Include="app\controllers\pizzasViewController.js" />
     <Content Include="app\controllers\signupController.js" />
+    <Content Include="app\directives\passwordMatch.js" />
+    <Content Include="app\services\base64Service.js" />
+    <Content Include="app\services\cookieStoreService.js" />
     <Content Include="app\services\customersService.js" />
     <Content Include="app\services\ordersService.js" />
     <Content Include="app\services\pizzaImagesService.js" />
@@ -230,6 +233,7 @@
     <Content Include="app\services\sharedPropertiesService.js" />
     <Content Include="app\views\cart.html" />
     <Content Include="app\views\login.html" />
+    <Content Include="app\views\logout.html" />
     <Content Include="app\views\orderSuccess.html" />
     <Content Include="app\views\pizzasList.html" />
     <Content Include="app\views\signup.html" />

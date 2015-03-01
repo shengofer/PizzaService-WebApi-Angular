@@ -6,6 +6,7 @@ var app = angular.module('PizzaApp', [
     'toaster',
     'satellizer',
     'ngMessages',
+     'ngCookies',
     'mgcrea.ngStrap'
    // 'chieffancypants.loadingBar',
 
@@ -20,26 +21,79 @@ app.config(function ($routeProvider,$authProvider) {
 
     $routeProvider.when("/signup",{
         controller: "signupController",
-        templateUrl: "app/views/signup.html"
+        templateUrl: "app/views/signup.html",
+        resolve: {
+            authenticated: function($q, $location, cookieService) {
+                var deferred = $q.defer();
+
+                if (cookieService.get()) {
+                    $location.path('/logout');
+                } else {
+                    deferred.resolve();
+                }
+
+                return deferred.promise;
+            }
+        }
     });
 
     $routeProvider.when("/login",{
         controller: "loginController",
-        templateUrl: "app/views/login.html"
+        templateUrl: "app/views/login.html",
+        resolve: {
+            authenticated: function($q, $location, cookieService) {
+                var deferred = $q.defer();
+
+                if (cookieService.get()) {
+                    $location.path('/logout');
+                } else {
+                    deferred.resolve();
+                }
+
+                return deferred.promise;
+            }
+        }
     });
 
     $routeProvider.when("/cart",{
         controller: "cartController",
-        templateUrl: "app/views/cart.html"
+        templateUrl: "app/views/cart.html",
+        resolve: {
+            authenticated: function($q, $location, cookieService) {
+                var deferred = $q.defer();
+
+                if (!cookieService.get()) {
+                    $location.path('/login');
+                } else {
+                    deferred.resolve();
+                }
+
+                return deferred.promise;
+            }
+        }
     });
 
     $routeProvider.when("/logout",{
         controller: "logoutController",
-        templateUrl: null
+        templateUrl:"app/views/logout.html"
+        //templateUrl:null
     });
 
     $routeProvider.when("/ordersucces", {
-          templateUrl:"app/views/orderSuccess.html"
+          templateUrl:"app/views/orderSuccess.html",
+            resolve: {
+            authenticated: function($q, $location, cookieService) {
+                var deferred = $q.defer();
+
+                if (!cookieService.get()) {
+                    $location.path('/login');
+                } else {
+                    deferred.resolve();
+                }
+
+                return deferred.promise;
+            }
+        }
     });
 
 /*    $routeProvider.when("/places", {

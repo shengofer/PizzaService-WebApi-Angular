@@ -35,12 +35,15 @@ namespace PizzaService.Data
         IQueryable<Pizza> GetAllPizza();
         List<Pizza> GetAllPizzaWithImage();
         // Order
+
+        Order GetOrderbyID(int idOrder);
         IQueryable<Order> GetPizzaActiveOrder();
 
         bool InsertOrder(Order order);
         //bool AddtoBucket(int customerID, int pizzaID);
 
         bool UpdateOrder(Order originOrder, Order updatedOrder);
+        bool DeleteOrderByID(int idOrder);
         //bool MakeStatusOrderPending(int customerID);
        // bool ChangeStatusFromPendingToFinish(int orderID);
         

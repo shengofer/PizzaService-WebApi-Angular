@@ -16,12 +16,16 @@ namespace PizzaService.Web.App_Start
             // MessageHandlers collection
             corsConfig.RegisterGlobal(httpConfig);
 
-            // this allow all CORS requests to the Products controller
-            // from the http://foo.com origin.
+            // this allow all CORS requests to the Auth controller
+            // from the http://localhost:63342/ origin.
             corsConfig
                .ForResources("Auth")
                .ForOrigins("http://localhost:63342/")
                .AllowAll();
+            corsConfig
+            .ForResources("Orders")
+            .ForOrigins("http://localhost:63342/")
+            .AllowAll();
         }
     }
 }

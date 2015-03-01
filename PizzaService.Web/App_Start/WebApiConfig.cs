@@ -22,6 +22,11 @@ namespace PizzaService.Web
                 defaults: new { controller = "auth", id=RouteParameter.Optional }
                );
             config.Routes.MapHttpRoute(
+              name: "Orders",
+              routeTemplate: "api/orders/{id}",
+              defaults: new { controller = "orders", id = RouteParameter.Optional }
+            );
+            config.Routes.MapHttpRoute(
               name: "Pizzas",
               routeTemplate: "api/pizzas/{id}",
               defaults: new { controller = "pizzas", id = RouteParameter.Optional }
@@ -33,17 +38,9 @@ namespace PizzaService.Web
              defaults: new { controller = "customers", id = RouteParameter.Optional }
          );
 
-           /* config.Routes.MapHttpRoute(
-              name: "Orders",
-              routeTemplate: "api/customers/{customerID}/pizzas/{pizzaID}",
-              defaults: new { controller = "orders", customerID = RouteParameter.Optional,pizzaID = RouteParameter.Optional}
-          );*/
 
-            config.Routes.MapHttpRoute(
-              name: "Orders",
-              routeTemplate: "api/orders/{orderID}",
-              defaults: new { controller = "orders", orderID= RouteParameter.Optional }
-            );
+
+    
 
             config.Routes.MapHttpRoute(
               name: "Images",

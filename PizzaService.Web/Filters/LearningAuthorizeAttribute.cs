@@ -40,8 +40,8 @@ namespace Learning.Web.Filters
                     var userName = credArray[0];
                     var password = credArray[1];
 
-                    if (IsResourceOwner(userName, actionContext))
-                    {
+                  //  if (IsResourceOwner(userName, actionContext))
+                 //   {
                         //You can use Websecurity or asp.net memebrship provider to login, for
                         //for he sake of keeping example simple, we used out own login functionality
                         if (TheRepository.LoginCustomer(userName, password))
@@ -50,7 +50,7 @@ namespace Learning.Web.Filters
                             Thread.CurrentPrincipal = currentPrincipal;
                             return;
                         }
-                    }
+                 //   }
                 }
             }
 
@@ -62,11 +62,11 @@ namespace Learning.Web.Filters
 
             //Base 64 encoded string
             var rawCred = authHeader.Parameter;
-            var encoding = Encoding.GetEncoding("iso-8859-1");
-            var cred = encoding.GetString(Convert.FromBase64String(rawCred));
+              var encoding = Encoding.GetEncoding("iso-8859-1");
+              var cred = encoding.GetString(Convert.FromBase64String(rawCred));
 
             var credArray = cred.Split(':');
-
+            //var credArray = rawCred.Split(':');
             return credArray;
         }
 

@@ -1,6 +1,7 @@
+'use strict';
 var app = angular.module('PizzaApp');
 
-app.service('sharedProperties',function() {
+app.factory('sharedProperties',function() {
     var user;
 
     return {
@@ -9,10 +10,10 @@ app.service('sharedProperties',function() {
         },
         setUser: function(newUser) {
             user = newUser;
-        },
-        isAuth: function() {
+        }
+/*        isAuth: function() {
             if(user) return true;
             else false;
-        }
+        }*/
     }
 });

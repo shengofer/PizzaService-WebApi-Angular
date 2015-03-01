@@ -107,13 +107,13 @@ namespace PizzaService.Web.Controllers
 
                 //var updatedCourse = TheModelFactory.Parse(courseModel);
 
-                if (updatedPizza == null) Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Could not read subject/tutor from body");
+                if (updatedPizza == null) Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Could not read pizza from body");
 
                 var originalPizza = TheRepository.GetPizza(id);
 
                 if (originalPizza == null || originalPizza.id != id)
                 {
-                    return Request.CreateResponse(HttpStatusCode.NotModified, "Course is not found");
+                    return Request.CreateResponse(HttpStatusCode.NotModified, "Pizza is not found");
                 }
                 else
                 {
@@ -151,7 +151,7 @@ namespace PizzaService.Web.Controllers
 
                 if (pizza.orders.Count > 0)
                 {
-                    return Request.CreateResponse(HttpStatusCode.BadRequest, "Can not delete course, students has enrollments in course.");
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, "Can not delete pizza, there are orders on this pizza.");
                 }
 
                 if (TheRepository.DeletePizza(id) && TheRepository.SaveAll())

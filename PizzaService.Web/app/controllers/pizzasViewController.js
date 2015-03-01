@@ -1,6 +1,6 @@
-
+'use strict';
 var app = angular.module('PizzaApp');
-app.controller('pizzasViewController', function ($scope,pizzasViewService, pizzaImagesService, $filter, $modal, sharedProperties,ordersService) {
+app.controller('pizzasViewController', function ($scope,pizzasViewService, pizzaImagesService, $filter, $modal, sharedProperties,ordersService,cookieService) {
 
     //paging
     $scope.totalRecordsCount = 0;
@@ -12,11 +12,15 @@ app.controller('pizzasViewController', function ($scope,pizzasViewService, pizza
       //  createWatche();
         getPlaces();
 
-        pizz = "sdfsfd";
+        //pizz = "sdfsfd";
     }
 
     $scope.isAuth = function(){
-        return sharedProperties.isAuth();
+        //return sharedProperties.isAuth();
+
+        if(cookieService.get())
+            return true;
+        else return  false;
     }
 
 
@@ -25,7 +29,7 @@ app.controller('pizzasViewController', function ($scope,pizzasViewService, pizza
 
        pizzasViewService.get({ page: $scope.currentPage-1, pageSize: $scope.pageSize},function (pizzasResult) {
 
-           for (i = 0; i < pizzasResult.results.length; i++) {
+           for (var i = 0; i < pizzasResult.results.length; i++) {
 
                pizzasResult.results[i].image =  'http://localhost:41841/api/images/'+pizzasResult.results[i].id;
 
@@ -33,7 +37,7 @@ app.controller('pizzasViewController', function ($scope,pizzasViewService, pizza
 
            $scope.totalRecordsCount =  pizzasResult.totalCount;
            $scope.pizzas = pizzasResult.results;
-           pizz = "sdfsfd";
+         //  pizz = "sdfsfd";
 
         });
     };
@@ -53,14 +57,14 @@ app.controller('pizzasViewController', function ($scope,pizzasViewService, pizza
     };
 
     function getImages(){
-       for (i = 0; i < $scope.pizzas.length; i++) {
+       for (var i = 0; i < $scope.pizzas.length; i++) {
             $scope.pizzas[i].image ='app/image/HamAndMushrooms.png';
         }
 
     }
 
      $scope.addToBucket = function (pizza){
-         var custId = sharedProperties.getUser().id;
+         var custId = cookieService.get().id;
          var pizzaId = pizza.id;
          //ordersService.post({ customerId: customerId, pizzaId: pizzaId})
         ordersService.post({customerId: custId, pizzaId:pizzaId});

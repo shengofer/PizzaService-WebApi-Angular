@@ -200,6 +200,34 @@ namespace PizzaService.Data
                 .AsQueryable();
         }
 
+        public Order GetOrderbyID(int idOrder)
+        {
+            return _ctx.Orders.Find(idOrder);
+        }
+
+        public bool DeleteOrderByID(int idOrder)
+        {
+            try
+            {
+                var entity = _ctx.Orders
+                    .Include("customer")
+                    .Include("pizza")
+                    .Where(c=>c.id==idOrder)
+                    .SingleOrDefault();
+                if (entity != null)
+                {
+                    _ctx.Orders.Remove(entity);
+                    return true;
+                }
+            }
+            catch
+            {
+                // TODO Logging
+            }
+
+            return false;
+        }
+
         public IQueryable<Order> GetPizzaCustomerOrderWithStatus(int customerID, int newActiveStatus)
         {
             return _ctx.Orders              

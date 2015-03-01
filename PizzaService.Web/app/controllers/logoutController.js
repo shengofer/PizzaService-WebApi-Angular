@@ -1,9 +1,11 @@
+'use strict';
 app = angular.module('PizzaApp');
-app.controller('logoutController', function($auth, $alert){
-    if (!$auth.isAuthenticated()) {
+app.controller('logoutController', function($auth, $alert,cookieService){
+  /*  if (!$auth.isAuthenticated()) {
         return;
-    }
-    $auth.logout()
+    }*/
+    cookieService.remove();
+/*    $auth.logout()
         .then(function() {
             $alert({
                 content: 'You have been logged out',
@@ -11,6 +13,7 @@ app.controller('logoutController', function($auth, $alert){
                 type: 'material',
                 duration: 3
             });
-            $location.path( "/explore" )
-        });
-})
+            cookieService.remove();
+           // $location.path( "/explore" )
+        });*/
+});

@@ -1,4 +1,5 @@
-﻿using PizzaService.Data.Entities;
+﻿using Learning.Web.Filters;
+using PizzaService.Data.Entities;
 using PizzaService.Web.Helper;
 using PizzaService.Web.Models;
 using System;
@@ -63,7 +64,7 @@ namespace PizzaService.Web.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
             }
         }
-
+      //  [ForceHttpsAttribute]
         [HttpGet]
         public Object Get([FromUri]int customerID,int page = 0, int pageSize = 10)
         {
@@ -105,6 +106,74 @@ namespace PizzaService.Web.Controllers
               //  Results = results
             };
 
+        }
+
+        [LearningAuthorizeAttribute]
+        [HttpDelete]
+       // [Route("delete")]
+        public HttpResponseMessage removeOrder(int id)
+        {
+            try
+            {
+               // TheRepository.DeleteOrderByID(id);
+           
+                if ( TheRepository.DeleteOrderByID(id) && TheRepository.SaveAll())
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK);
+                }
+                else
+                {
+                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Could not save to the database.");
+                }
+                // return Ok();
+            }
+            catch
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Problem is occured");
+            }
+
+        }
+
+        [HttpPost]
+        [Route("changestatus")]
+        public IHttpActionResult makeOrder([FromUri] int idOrder)
+        {
+
+            try
+            {
+                //foreach (int i in id)
+               // {
+                    Order oldOrder = TheRepository.GetOrderbyID(idOrder);
+                    Order newOrder = oldOrder;
+                    newOrder.activeStatus = 0;
+
+                    TheRepository.UpdateOrder(oldOrder, newOrder);
+              //  }
+                return Ok();
+            }
+            catch
+            {
+                return BadRequest("Problem is occured");
+            }
+
+
+        }
+
+        public IHttpActionResult cancelOrder([FromUri] int idOrder)
+        {
+
+            try
+            {
+                Order oldOrder = TheRepository.GetOrderbyID(idOrder);
+                Order newOrder = oldOrder;
+                newOrder.activeStatus = 1;
+                TheRepository.UpdateOrder(oldOrder, newOrder);
+                return Ok();
+            }
+            catch
+            {
+                return BadRequest("Something go wrong");
+            }
         }
 
        
