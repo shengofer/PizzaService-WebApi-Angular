@@ -5,6 +5,7 @@ app.controller('cartController', function($scope,ordersService,$location, shared
     $scope.totalRecordsCount = 0;
     $scope.pageSize = 10;
     $scope.currentPage = 1;
+
     init();
     function init() {
 
@@ -38,10 +39,9 @@ app.controller('cartController', function($scope,ordersService,$location, shared
       //  for(var bucket in $scope.bucketList){
         for(var i=0;i<$scope.bucketList.length;i++){
             idArray.push($scope.bucketList[i].orderID);
-
         }
-
-        ordersService.post({id:idArray})
+        ordersService.makeorders({idList:idArray})
+      //  $route.reload();
     }
 
     $scope.removeOrder = function(orderID){

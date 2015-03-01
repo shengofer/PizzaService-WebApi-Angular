@@ -6,13 +6,11 @@ app.controller('pizzasViewController', function ($scope,pizzasViewService, pizza
     $scope.totalRecordsCount = 0;
     $scope.pageSize = 10;
     $scope.currentPage = 1;
+   // $scope.pizzas = null;
     init();
     function init() {
-
       //  createWatche();
-        getPlaces();
-
-        //pizz = "sdfsfd";
+            getPlaces();
     }
 
     $scope.isAuth = function(){
@@ -30,39 +28,30 @@ app.controller('pizzasViewController', function ($scope,pizzasViewService, pizza
        pizzasViewService.get({ page: $scope.currentPage-1, pageSize: $scope.pageSize},function (pizzasResult) {
 
            for (var i = 0; i < pizzasResult.results.length; i++) {
-
                pizzasResult.results[i].image =  'http://localhost:41841/api/images/'+pizzasResult.results[i].id;
 
            }
-
            $scope.totalRecordsCount =  pizzasResult.totalCount;
            $scope.pizzas = pizzasResult.results;
-         //  pizz = "sdfsfd";
 
         });
     };
 
     $scope.pageChanged = function (page) {
-
         $scope.currentPage = page;
         getPlaces();
-
     };
 
     $scope.doSearch = function () {
-
         $scope.currentPage = 1;
         getPlaces();
-
     };
 
     function getImages(){
        for (var i = 0; i < $scope.pizzas.length; i++) {
             $scope.pizzas[i].image ='app/image/HamAndMushrooms.png';
         }
-
     }
-
      $scope.addToBucket = function (pizza){
          var custId = cookieService.get().id;
          var pizzaId = pizza.id;

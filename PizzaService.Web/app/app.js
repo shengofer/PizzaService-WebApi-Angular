@@ -96,16 +96,6 @@ app.config(function ($routeProvider,$authProvider) {
         }
     });
 
-/*    $routeProvider.when("/places", {
-        controller: "myPlacesController",
-        templateUrl: "/app/views/myplaces.html"
-    });
-
-    $routeProvider.when("/about", {
-        controller: "aboutController",
-        templateUrl: "/app/views/about.html"
-    });*/
-
     $routeProvider.otherwise({ redirectTo: "/explore" });
 
 

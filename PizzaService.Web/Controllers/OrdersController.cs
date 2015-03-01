@@ -29,14 +29,10 @@ namespace PizzaService.Web.Controllers
                 if (customer == null) return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Could not find Customer");
                 if (pizza == null) return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Could not find Pizza");
 
-                //order.customer = customer;
-               // order.pizza = pizza;
                 Order order = new Order
                 {
                    customer = customer,
                    pizza = pizza,
-                  // customer = null,
-                  // pizza = null,
                    activeStatus = 1
                 };
                 
@@ -89,12 +85,7 @@ namespace PizzaService.Web.Controllers
             {
                 bucketListModel.Add(TheModelFactory.CreateUserBucketList(o));
             }
-           // List<PizzaModel> pizzaList = new List<PizzaModel>();
-
-           /* foreach(Order o in results){
-                pizzaList.Add(TheModelFactory.CreatePizzaModel(o.pizza));
-            }*/
-            //PizzaModel pizzaModel = TheModelFactory.CreatePizzaModel()
+ 
             return new
             {
                 TotalCount = totalCount,
@@ -125,7 +116,6 @@ namespace PizzaService.Web.Controllers
                 {
                     return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Could not save to the database.");
                 }
-                // return Ok();
             }
             catch
             {
@@ -133,30 +123,33 @@ namespace PizzaService.Web.Controllers
             }
 
         }
-
+        [LearningAuthorizeAttribute]
         [HttpPost]
-        [Route("changestatus")]
-        public IHttpActionResult makeOrder([FromUri] int idOrder)
+       // [Route("changestatus")]
+        public HttpResponseMessage makeOrder([FromUri] List<int> idList)
         {
 
             try
             {
-                //foreach (int i in id)
-               // {
-                    Order oldOrder = TheRepository.GetOrderbyID(idOrder);
-                    Order newOrder = oldOrder;
-                    newOrder.activeStatus = 0;
-
+                foreach (int i in idList)
+                {
+                Order oldOrder = TheRepository.GetOrderbyID(i);
+                Order newOrder = new Order
+                {
+                    customer = oldOrder.customer,
+                    id = oldOrder.id,
+                    pizza = oldOrder.pizza,
+                    activeStatus = 0
+                };
                     TheRepository.UpdateOrder(oldOrder, newOrder);
-              //  }
-                return Ok();
+                    bool b = TheRepository.SaveAll();
+                }
+                    return Request.CreateResponse(HttpStatusCode.OK);
             }
             catch
             {
-                return BadRequest("Problem is occured");
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Problem is occured");
             }
-
-
         }
 
         public IHttpActionResult cancelOrder([FromUri] int idOrder)
@@ -175,9 +168,6 @@ namespace PizzaService.Web.Controllers
                 return BadRequest("Something go wrong");
             }
         }
-
-       
-
 
     }
 }

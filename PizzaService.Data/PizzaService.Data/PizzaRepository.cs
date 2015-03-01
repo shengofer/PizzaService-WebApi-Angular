@@ -49,27 +49,7 @@ namespace PizzaService.Data
         {
             return  _ctx.Customers.Where(s => s.email == email).SingleOrDefault();
         }
-     //   bool update(Customer originalStudent, Customer updatedStudent)
 
-
-        /*public bool DeleteCustomer(int id)
-        {
-            try
-            {
-                var entity = _ctx.Customers.Find(id);
-                if (entity != null)
-                {
-                    _ctx.Customers.Remove(entity);
-                    return true;
-                }
-            }
-            catch
-            {
-                // TODO Logging
-            }
-
-            return false;
-        }*/
         public Customer GetCustomer(int customerId)
         {
             return _ctx.Customers.Find(customerId);
@@ -93,9 +73,6 @@ namespace PizzaService.Data
         public bool UpdatePizza(Pizza originalPizza, Pizza updatedPizza)
         {
             _ctx.Entry(originalPizza).CurrentValues.SetValues(updatedPizza);
-            //To update child entites in Pizza entity
-
-
             return true;
         }
         public bool DeletePizza(int id)
@@ -120,17 +97,6 @@ namespace PizzaService.Data
         public Pizza GetPizza(int pizzaId)
         {
             return _ctx.Pizzas.Find(pizzaId);
-          /*  return _ctx.Pizzas
-                .Include("PizzaImages")
-                .Where(c =>c.id == pizzaId)
-                .SingleOrDefault();*/
-                // .Where(c => c.orders.Any(s => s.customer.id == customerID && s.activeStatus==1))
-         /*   var result = from p in _ctx.Pizzas
-                         join i in _ctx.PizzaImages on p.image.id equals i.id
-                         where p.id == pizzaId
-                         select p;
-
-            return result.SingleOrDefault();*/
         }
 
         public IQueryable<Pizza> GetAllPizza()
@@ -202,7 +168,13 @@ namespace PizzaService.Data
 
         public Order GetOrderbyID(int idOrder)
         {
-            return _ctx.Orders.Find(idOrder);
+           return _ctx.Orders
+                    .Include("customer")
+                    .Include("pizza")
+                    .Where(c => c.id == idOrder)
+                    .SingleOrDefault();
+           // return _ctx.Orders.Find(idOrder);
+
         }
 
         public bool DeleteOrderByID(int idOrder)
@@ -261,6 +233,8 @@ namespace PizzaService.Data
         public bool UpdateOrder(Order originOrder, Order updatedOrder)
         {
             _ctx.Entry(originOrder).CurrentValues.SetValues(updatedOrder);
+
+            //return SaveAll();
             return true;
         
         }

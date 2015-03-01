@@ -1,9 +1,6 @@
 'use strict';
 app = angular.module('PizzaApp');
 app.controller('logoutController', function($auth, $alert,cookieService){
-  /*  if (!$auth.isAuthenticated()) {
-        return;
-    }*/
     cookieService.remove();
 /*    $auth.logout()
         .then(function() {

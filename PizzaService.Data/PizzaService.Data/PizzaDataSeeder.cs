@@ -134,41 +134,6 @@ namespace PizzaService.Data
             }
         }
 
-        /*  public static byte[] ImageToByte(PizzaImage img)
-          {
-              ImageConverter converter = new ImageConverter();
-              return (byte[])converter.ConvertTo(img, typeof(byte[]));
-          }
-
-            public byte[] imageToByteArray(System.Drawing.Image imageIn)
-            {
-                MemoryStream ms = new MemoryStream();
-                imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
-                return ms.ToArray();
-            }
-        
-            public static byte[] converterDemo(PizzaImage x)
-            {
-                ImageConverter _imageConverter = new ImageConverter();
-                byte[] xByte = (byte[])_imageConverter.ConvertTo(x, typeof(byte[]));
-                return xByte;
-            }*/
-
-     /*   public PizzaImage byteArrayToImage(byte[] byteArrayIn)
-        {
-            MemoryStream ms = new MemoryStream(byteArrayIn);
-            PizzaImage returnImage = PizzaImage.FromStream(ms);
-            return returnImage;
-        }*/
-      /*  public byte[] imageToByteArray(System.Drawing.Image imageIn)
-        {
-            MemoryStream ms = new MemoryStream();
-            imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
-            return ms.ToArray();
-        }
-        */
-        
-
         private string RandomString(int size)
         {
             Random _rng = new Random((int)DateTime.Now.Ticks);
@@ -182,33 +147,7 @@ namespace PizzaService.Data
             return new string(buffer);
         }
 
-    /*    static string[] customerNames = 
-        { 
-            "Taiseer,Joudeh,hotmail.com", 
-            "Hasan,Ahmad,mymail.com", 
-            "Moatasem,Ahmad,outlook.com", 
-            "Salma,Tamer,outlook.com", 
-            "Ahmad,Radi,gmail.com", 
-            "Bill,Gates,yahoo.com", 
-            "Shareef,Khaled,gmail.com", 
-            "Aram,Naser,gmail.com", 
-            "Layla,Ibrahim,mymail.com", 
-            "Rema,Oday,hotmail.com",
-            "Fikri,Husein,gmail.com",
-            "Zakari,Husein,outlook.com",
-            "Taher,Waleed,mymail.com",
-            "Tamer,Wesam,yahoo.com",
-            "Khaled,Hasaan,gmail.com",
-            "Asaad,Ibrahim,hotmail.com",
-            "Tareq,Nassar,outlook.com",
-            "Diana,Lutfi,outlook.com",
-            "Tamara,Malek,gmail.com",
-            "Arwa,Kamal,yahoo.com",
-            "Jana,Ahmad,yahoo.com",
-            "Nisreen,Tamer,gmail.com",
-            "Noura,Ahmad,outlook.com"
-        };*/
-
+   
         private static string[] SplitValue(string val)
         {
             return val.Split(':');
